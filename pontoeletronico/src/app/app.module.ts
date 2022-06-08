@@ -9,13 +9,16 @@ import { HttpService } from './http.service';
 import { LoginComponent } from './login/login.component';
 import { TemplateModule } from './template/template.module';
 import { HomeComponent } from './home/home.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MeusdadosModule } from './meusdados/meusdados.module';
+import { InterceptorInterceptor } from './core/interceptor/interceptor.interceptor';
+import { TokenService } from './core/service/token.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,9 +26,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     TemplateModule,
     RouterModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MeusdadosModule
   ],
-  providers: [HttpService],
+  providers: [HttpService,
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true },
+          TokenService
+        ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

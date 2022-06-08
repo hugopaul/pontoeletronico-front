@@ -1,0 +1,147 @@
+<br>
+<br>
+<br>
+
+
+<div class="container mt-5">
+    <h1 class="mt-4">Meus Dados</h1>
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Informações</li>
+    </ol>
+    <div class="container">
+        <form #loginForm="ngForm" (submit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success" role="alert" *ngIf="msgSucesso == true">
+                        Informações salvo(a)s com sucesso!
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert" *ngIf="msgfalha == true && errors.length > 0">
+                        {{ errors }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="small mb-1">Nome Completo</label>
+                <input type="text" class="form-control py-4" name="nmColaborador"
+                    [(ngModel)]="colaborador.nmColaborador" autocomplete="off" placeholder="Digite o nome completo"
+                    disabled />
+            </div>
+            <div class="form-group">
+                <label class="small mb-1">Login</label>
+                <input type="text" class="form-control py-4" name="username" [(ngModel)]="colaborador.username"
+                    autocomplete="off" disabled />
+            </div>
+
+            <label class="small mb-1">Senha</label>
+            <div class="form-group">
+                <input type="password" class="form-control py-4" name="password" [(ngModel)]="colaborador.password"
+                    placeholder="Clique para editar" disabled />
+
+            </div>
+            <label class="small mb-1">Perfil</label>
+            <div class="form-group">
+                <input type="perfis" class="form-control py-4" name="perfis" [(ngModel)]="perfis" disabled />
+
+            </div>
+
+            <div class="row">
+                <div class="form-group d-flex align-items-center justity-content-between mt-4 mt-0">
+                    <button class="btn btn-success">Salvar</button>
+                </div>
+                <div class="form-group d-flex justity-content-between mt-4 mt-0 ml-4">
+                    <button class="btn btn-secondary" routerLink="/home">Voltar</button>
+                </div>
+                <div class="form-group float-right mt-4 mt-0 ml-4">
+                    <button data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-danger">Alterar
+                        Senha</button>
+                </div>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Alteração de Senha</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="alert alert-success" role="alert" *ngIf="msgMatchNewPasswordsSucesso == true">
+                        As senhas estão iguais!
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert" *ngIf="msgMatchNewPasswordsfalha == true">
+                        As senhas não estão iguais!
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert" *ngIf="msgNewPassfalha == true">
+                        Senha antiga incorreta!
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="alert alert-success" role="alert" *ngIf="msgNewPassSucesso == true">
+                        Senha antiga correta!
+                    </div>
+                </div>
+                <label class="small mb-1">Senha Antiga</label>
+                <div class="form-group">
+                    <input type="text" class="form-control py-4" (keyup)="matchPass($event)" name="senha"
+                        [(ngModel)]="velhaSenha" />
+
+                </div><label class="small mb-1">Senha Nova</label>
+                <div class="form-group">
+                    <input type="text" class="form-control py-4" name="perfis" [(ngModel)]="novaSenha" />
+
+                </div><label class="small mb-1">Repita Senha Nova</label>
+                <div class="form-group">
+                    <input type="text" class="form-control py-4" (keyup)="semePasswords($event)" name="perfis"
+                        [(ngModel)]="novaSenhaRepetida" />
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="clearPassFields()">Fechar</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter1"
+                    *ngIf="msgMatchNewPasswordsSucesso == true && msgNewPassSucesso == true"
+                    data-dismiss="modal">Alterar Senha</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Confirmação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Salvar senha?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="clearPassFields()">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="salvarNovaSenha()" data-dismiss="modal">Salvar
+                    Senha</button>
+            </div>
+        </div>
+    </div>
+</div>

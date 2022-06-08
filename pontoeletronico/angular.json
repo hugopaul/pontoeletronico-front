@@ -31,7 +31,16 @@
               "node_modules/font-awesome/css/font-awesome.min.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery-2.1.0.min.js",
+              "node_modules/jquery/dist/popper.js",
+              "node_modules/jquery/dist/bootstrap.min.js",
+              "node_modules/jquery/dist/scrollreveal.min.js",
+              "node_modules/jquery/dist/waypoints.min.js",
+              "node_modules/jquery/dist/jquery.counterup.min.js",
+              "node_modules/jquery/dist/imgfix.min.js",
+              "node_modules/jquery/dist/custom.js"
+            ]
           },
           "configurations": {
             "production": {

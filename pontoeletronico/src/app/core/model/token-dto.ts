@@ -1,4 +1,4 @@
 export class TokenDTO{
-    type!:string;
-    token!:string;
+    type!: string;
+    token!: string;
 }

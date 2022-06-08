@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HttpService } from '../http.service';
 import { LoginDTO } from '../core/model/login-dto';
+import { TokenDTO } from '../core/model/token-dto';
 
 
 @Component({
@@ -27,13 +28,16 @@ export class LoginComponent {
     loginDTO.password = this.password;
     this.http.login(loginDTO).subscribe(
       success => {
+        if(success.status === 403){
+          this.errors = ['Usuário e/ou senha incorretos']
+        }else if(success.status === 200){}
+        let token : TokenDTO = success;
+        window.localStorage.setItem('Jwt', token.token);
+        window.localStorage.setItem('username', token.type);
+        this.router.navigate(['/home'])
     },
     error => {
-      if(error.status === 403){
-        this.errors = ['Usuário e/ou senha incorretos']
-      }else if(error.status === 200){}
-      window.localStorage.setItem('Jwt', error.error.text)
-      this.router.navigate(['/home'])
+      this.errors = ['Usuário e/ou senha incorretos']
     }
     )
      
