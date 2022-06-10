@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Colaborador } from 'src/app/core/model/colaborador';
 import { PassMatches } from 'src/app/core/model/pass-matches';
-import { TokenDTO } from 'src/app/core/model/token-dto';
 import { TokenService } from 'src/app/core/service/token.service';
 import { HttpService } from 'src/app/http.service';
 

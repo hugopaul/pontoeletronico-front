@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { HttpService } from '../http.service';
-import { LoginDTO } from '../core/model/login-dto';
-import { TokenDTO } from '../core/model/token-dto';
+import { HttpService } from '../../http.service';
+import { LoginDTO } from '../../core/model/login-dto';
+import { TokenDTO } from '../../core/model/token-dto';
 
 
 @Component({

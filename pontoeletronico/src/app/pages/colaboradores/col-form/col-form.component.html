@@ -1,0 +1,85 @@
+<br>
+<br>
+<br>
+
+
+<div class="container mt-5">
+    <h1 class="mt-4">Meus Dados</h1>
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Informações</li>
+    </ol>
+    <div class="container">
+        <form #loginForm="ngForm" (submit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success" role="alert" *ngIf="msgSucesso == true">
+                        Colaborador salvo(a) com sucesso!
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert" *ngIf="msgfalha == true">
+                        Erro ao salvar o(a) colaborador!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="small mb-1">Nome Completo</label>
+                <input type="text" class="form-control py-4" name="nmColaborador"
+                    [(ngModel)]="colaborador.nmColaborador" autocomplete="off" placeholder="Digite o nome completo" />
+            </div>
+            <div class="form-group">
+                <label class="small mb-1">Telefone</label>
+                <input type="text" class="form-control py-4" name="telefone"  mask="(00) 0 0000-0000" 
+                    [(ngModel)]="colaborador.telefone" autocomplete="off" placeholder="Digite o telefone" />
+            </div>
+            <div class="form-group">
+                <label class="small mb-1">Login</label>
+                <input type="text" class="form-control py-4" name="username" [(ngModel)]="colaborador.username"
+                    autocomplete="off" placeholder="Digite o login" />
+            </div>
+
+            <label class="small mb-1">Senha</label>
+            <div class="form-group">
+                <input type="password" class="form-control py-4" name="password" [(ngModel)]="colaborador.password"
+                    placeholder="Digite sua senha" />
+            </div>
+            <label class="small mb-1">Perfil</label>
+            <div class="form-group">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" (click)="userCheck()"[checked]="user">
+                    <label class="form-check-label" for="inlineCheckbox1">USER</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" (click)="gerenteCheck() "[checked]="gerente">
+                    <label class="form-check-label" for="inlineCheckbox2">GERENTE</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" (click)="proprietarioCheck() " [checked]="proprietario">
+                    <label class="form-check-label" for="inlineCheckbox3">PROPRIETARIO</label>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="form-group float-right mt-4 mt-0 ml-4">
+                    <button class="btn btn-primary" type="submit">Cadastrar</button>
+                </div>
+                <div class="form-group d-flex justity-content-between mt-4 mt-0 ml-4">
+                    <button class="btn btn-secondary" routerLink="/colaborador/list">Voltar</button>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            
+            <br>
+            <br>
+            <br>
+            
+            
+        </form>
+
+    </div>
+</div>
