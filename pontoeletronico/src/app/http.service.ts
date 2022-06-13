@@ -6,6 +6,7 @@ import { Colaborador } from './core/model/colaborador';
 import { TokenDTO } from './core/model/token-dto';
 import { PassMatches } from './core/model/pass-matches';
 import { RequestLancamento } from './core/model/request-lancamento';
+import { Lancamento } from './core/model/lancamento';
 
 
 
@@ -54,7 +55,10 @@ export class HttpService {
         return this.http.get<Colaborador>(this.url + "/colaborador/" + id)
     }
 
-    postLancamento(lancamento:RequestLancamento): Observable<any>{
-        return this.http.post<any>(this.url + "/lancamento", lancamento)
+    postLancamento(lancamento:RequestLancamento): Observable<Lancamento>{
+        return this.http.post<Lancamento>(this.url + "/lancamento", lancamento)
+    }
+    getLancamentosOfColaborador():Observable<Lancamento[]>{
+        return this.http.get<Lancamento[]>(this.url + "/lancamento/colaborador")
     }
 }

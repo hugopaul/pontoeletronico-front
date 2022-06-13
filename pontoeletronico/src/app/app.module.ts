@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -15,12 +15,14 @@ import { InterceptorInterceptor } from './core/interceptor/interceptor.intercept
 import { TokenService } from './core/service/token.service';
 import { ColaboradoresModule } from './pages/colaboradores/colaboradores.module';
 import { PontoModule } from './pages/ponto/ponto.module';
+import { SafePipe } from './core/safe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
+    HomeComponent, 
+    SafePipe
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,7 @@ import { PontoModule } from './pages/ponto/ponto.module';
     FormsModule,
     HttpClientModule,
     MeusdadosModule,
-    ColaboradoresModule,
+    ColaboradoresModule, 
     PontoModule
   ],
   providers: [HttpService,

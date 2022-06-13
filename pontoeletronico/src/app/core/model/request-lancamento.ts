@@ -1,7 +1,9 @@
-import { GeolocationPosition } from "./geolocation-position";
+import { Timestamp } from "rxjs";
 
 
 export class RequestLancamento{
-    geolocationPosition!:GeolocationPosition;
+    latitude!:string;
+    longitude!:string;
+    timestamp!:string;
 
 }
