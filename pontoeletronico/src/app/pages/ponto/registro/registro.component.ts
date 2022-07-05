@@ -17,25 +17,32 @@ export class RegistroComponent implements OnInit {
   lancamento!: Lancamento;
 
   iFrameUri!: URL;
-  
-  latitude:string="";
-  longitude:string ="";
-  timestamp:string = "";
+
+  latitude: string = "";
+  longitude: string = "";
+  timestamp: string = "";
 
   lancamentos!: Lancamento[];
 
+  requestLancamento!: RequestLancamento;
   constructor(
     private tokenService: TokenService,
     private http: HttpService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) {
-   }
+  }
 
   ngOnInit(): void {
+    this.requestLancamento = this.preparaLancamento();
+
+    this.getUltimosRegistros();
+  }
+
+  loadPosition() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
 
-       }, error => {
+      }, error => {
         console.log("geoloclização desativada")
         alert("ATIVE A LOCALIZAÇÃO DO SEU NAVEGADOR!")
         setTimeout(function () {
@@ -44,49 +51,48 @@ export class RegistroComponent implements OnInit {
 
       })
     }
-    this.getUltimosRegistros();
   }
 
-  verificarTipoEsperado(value : any){
-      if (value == null || value == undefined){
-        return ""
-      }else{
-        return value.toString();
-      }
+  verificarTipoEsperado(value: any) {
+    if (value == null || value == undefined) {
+      return ""
+    } else {
+      return value.toString();
+    }
 
 
   }
 
   onSubmit() {
+    this.requestLancamento = this.preparaLancamento();
 
-    let requestLancamento = this.preparaLancamento();
-    if(requestLancamento.latitude != null || requestLancamento.latitude != ""){
-      this.http.postLancamento(requestLancamento).subscribe(
+    if (this.requestLancamento.latitude != null || this.requestLancamento.latitude != "") {
+      this.http.postLancamento(this.requestLancamento).subscribe(
         success => {
           this.lancamento = success;
           this.sinalSucesso = true
-          this.getUltimosRegistros();    
+          this.getUltimosRegistros();
 
         }, error => {
           this.sinalFalha = true
           this.sinalSucesso = false
         })
-    }else{
+    } else {
       console.log("Send geolocation error!")
     }
-    
+
   }
 
-  preparaLancamento(){
+  preparaLancamento() {
     var requestLancamento = new RequestLancamento();
     navigator.geolocation.getCurrentPosition((position) => {
       console.log(position)
-      this.latitude  =  this.verificarTipoEsperado(position.coords.latitude);
+      this.latitude = this.verificarTipoEsperado(position.coords.latitude);
       this.longitude = this.verificarTipoEsperado(position.coords.longitude);
       this.timestamp = this.verificarTipoEsperado(position.timestamp);
 
-    }, error =>{
-        console.log("Erro in get geolocation")
+    }, error => {
+      console.log("Erro in get geolocation")
     });
     requestLancamento.latitude = this.latitude
     requestLancamento.longitude = this.longitude
@@ -95,16 +101,20 @@ export class RegistroComponent implements OnInit {
   }
 
   getUltimosRegistros() {
-      this.http.getLancamentosOfColaborador().subscribe(
-        success => {this.lancamentos = success},
-        error => {console.log("Get lancamentos error")}
-      );
+    setTimeout(function () {
+
+    }, 5000);
+
+    this.http.getLancamentosOfColaborador().subscribe(
+      success => { this.lancamentos = success },
+      error => { console.log("Get lancamentos error") }
+    );
 
 
   }
-  getLocalizationSRC(){
+  getLocalizationSRC() {
     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyAnPU51TGj7Ce6aqD7fcmctkzgb4M8W5xo&center=-15.9973376,-48.0509952&q=-15.9973376,-48.0509952");
-     
+
 
   }
 

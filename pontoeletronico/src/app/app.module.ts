@@ -16,6 +16,7 @@ import { TokenService } from './core/service/token.service';
 import { ColaboradoresModule } from './pages/colaboradores/colaboradores.module';
 import { PontoModule } from './pages/ponto/ponto.module';
 import { SafePipe } from './core/safe.pipe';
+import { MeuslancamentosModule } from './pages/meuslancamentos/meuslancamentos.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SafePipe } from './core/safe.pipe';
     HttpClientModule,
     MeusdadosModule,
     ColaboradoresModule, 
-    PontoModule
+    PontoModule,
+    MeuslancamentosModule
   ],
   providers: [HttpService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true },

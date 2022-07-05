@@ -7,6 +7,7 @@ import { TokenDTO } from './core/model/token-dto';
 import { PassMatches } from './core/model/pass-matches';
 import { RequestLancamento } from './core/model/request-lancamento';
 import { Lancamento } from './core/model/lancamento';
+import { MeusLancamentosConcatenados } from './core/model/meus-lancamentos-concatenados';
 
 
 
@@ -55,10 +56,18 @@ export class HttpService {
         return this.http.get<Colaborador>(this.url + "/colaborador/" + id)
     }
 
+
+
+
+
     postLancamento(lancamento:RequestLancamento): Observable<Lancamento>{
-        return this.http.post<Lancamento>(this.url + "/lancamento", lancamento)
+        return this.http.post<Lancamento>(this.url + "/lancamentos", lancamento)
     }
     getLancamentosOfColaborador():Observable<Lancamento[]>{
-        return this.http.get<Lancamento[]>(this.url + "/lancamento/colaborador")
+        return this.http.get<Lancamento[]>(this.url + "/lancamentos/colaborador")
+    }
+
+    getMeusLancamentosConcatenados(): Observable<MeusLancamentosConcatenados[]>{
+        return this.http.get<MeusLancamentosConcatenados[]>(this.url+"/lancamentos/getMeusLancamentosConcatenados")
     }
 }
