@@ -8,6 +8,7 @@ import { PassMatches } from './core/model/pass-matches';
 import { RequestLancamento } from './core/model/request-lancamento';
 import { Lancamento } from './core/model/lancamento';
 import { MeusLancamentosConcatenados } from './core/model/meus-lancamentos-concatenados';
+import { LancamentosConcatenados } from './core/model/lancamentos-concatenados';
 
 
 
@@ -22,7 +23,8 @@ export class HttpService {
     ) { }
 
 
-    url: string = 'http://localhost:8080'
+    //url: string = 'http://localhost:8080/pontoeletronico'
+    url: string = 'https://solidtechsolutions.com.br/pontoeletronico/api'
 
     login(loginDTO: LoginDTO): Observable<any> {
         return this.http.post<any>(this.url + '/login', loginDTO)
@@ -56,8 +58,7 @@ export class HttpService {
         return this.http.get<Colaborador>(this.url + "/colaborador/" + id)
     }
 
-
-
+  
 
 
     postLancamento(lancamento:RequestLancamento): Observable<Lancamento>{
@@ -70,4 +71,9 @@ export class HttpService {
     getMeusLancamentosConcatenados(): Observable<MeusLancamentosConcatenados[]>{
         return this.http.get<MeusLancamentosConcatenados[]>(this.url+"/lancamentos/getMeusLancamentosConcatenados")
     }
+
+    getAllLancamentos() : Observable<LancamentosConcatenados[]>{
+        return this.http.get<LancamentosConcatenados[]>(this.url+"/lancamentos")
+    }
+
 }

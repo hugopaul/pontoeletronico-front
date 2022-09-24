@@ -17,6 +17,7 @@ import { ColaboradoresModule } from './pages/colaboradores/colaboradores.module'
 import { PontoModule } from './pages/ponto/ponto.module';
 import { SafePipe } from './core/safe.pipe';
 import { MeuslancamentosModule } from './pages/meuslancamentos/meuslancamentos.module';
+import { LancementosModule } from './pages/lancementos/lancementos.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MeuslancamentosModule } from './pages/meuslancamentos/meuslancamentos.m
     MeusdadosModule,
     ColaboradoresModule, 
     PontoModule,
-    MeuslancamentosModule
+    MeuslancamentosModule,
+    LancementosModule
   ],
   providers: [HttpService,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true },

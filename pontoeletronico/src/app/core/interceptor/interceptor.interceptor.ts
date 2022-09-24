@@ -10,10 +10,15 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class InterceptorInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor() { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    request = request.clone({ setHeaders: { Authorization: 'Bearer ' + window.localStorage.getItem('Jwt') } });
+    request = request.clone({
+      setHeaders: {
+        Authorization: 'Bearer ' + window.localStorage.getItem('Jwt'),
+        'Access-Control-Allow-Origin': 'http://solidtechsolutions.com.br/'
+      }
+    });
     return next.handle(request);
   }
 }
